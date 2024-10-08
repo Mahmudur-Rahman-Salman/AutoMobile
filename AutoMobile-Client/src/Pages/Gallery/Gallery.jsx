@@ -49,6 +49,7 @@ const Gallery = () => {
             <Tab>Mahindra</Tab>
             <Tab>Maruti Suzuki</Tab>
           </TabList>
+
           <TabPanel>
             <CarTabs items={Audi}></CarTabs>
           </TabPanel>
@@ -65,25 +66,25 @@ const Gallery = () => {
             <CarTabs items={RollsRoyce}></CarTabs>
           </TabPanel>
           <TabPanel>
-          <CarTabs items={Mercedes}></CarTabs>
+            <CarTabs items={Mercedes}></CarTabs>
           </TabPanel>
           <TabPanel>
-          <CarTabs items={Porsche}></CarTabs>
+            <CarTabs items={Porsche}></CarTabs>
           </TabPanel>
           <TabPanel>
-          <CarTabs items={Toyota}></CarTabs>
+            <CarTabs items={Toyota}></CarTabs>
           </TabPanel>
           <TabPanel>
-          <CarTabs items={Volvo}></CarTabs>
+            <CarTabs items={Volvo}></CarTabs>
           </TabPanel>
           <TabPanel>
-          <CarTabs items={Hyundai}></CarTabs>
+            <CarTabs items={Hyundai}></CarTabs>
           </TabPanel>
           <TabPanel>
-          <CarTabs items={Mahindra}></CarTabs>
+            <CarTabs items={Mahindra}></CarTabs>
           </TabPanel>
           <TabPanel>
-          <CarTabs items={MarutiSuzuki}></CarTabs>
+            <CarTabs items={MarutiSuzuki}></CarTabs>
           </TabPanel>
         </Tabs>
       </div>
