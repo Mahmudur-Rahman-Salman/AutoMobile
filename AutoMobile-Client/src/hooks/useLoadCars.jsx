@@ -5,7 +5,7 @@ const useLoadCars = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("cars.json")
+    fetch("http://localhost:5000/gallery")
       .then((res) => res.json())
       .then((data) => {
         setLoadCars(data);
