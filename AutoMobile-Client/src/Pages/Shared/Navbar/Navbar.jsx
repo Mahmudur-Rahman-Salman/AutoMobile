@@ -113,15 +113,21 @@ const Navbar = () => {
             >
               <li>
                 <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
+                  Login
+                  <span className="badge badge-primary">&#187;</span>
                 </a>
               </li>
               <li>
-                <a>Settings</a>
+                <a>
+                  Sing Up
+                  <span className="badge badge-info">&#187;</span>
+                </a>
               </li>
               <li>
-                <a>Logout</a>
+                <a>
+                  Logout
+                  <span className="badge badge-secondary">&#8594;</span>
+                </a>
               </li>
             </ul>
           </div>

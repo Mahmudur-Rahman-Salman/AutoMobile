@@ -26,9 +26,14 @@ async function run() {
     await client.connect();
 
     const carCollection = client.db("AutomobileDB").collection("cars");
+    const reviewsCollection = client.db("AutomobileDB").collection("reviews");
 
     app.get("/gallery", async (req, res) => {
       const result = await carCollection.find().toArray();
+      res.send(result);
+    });
+    app.get("/reviews", async (req, res) => {
+      const result = await reviewsCollection.find().toArray();
       res.send(result);
     });
 
