@@ -118,10 +118,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <a>
+                <Link to="/signup">
                   Sing Up
                   <span className="badge badge-info">&#187;</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <a>
