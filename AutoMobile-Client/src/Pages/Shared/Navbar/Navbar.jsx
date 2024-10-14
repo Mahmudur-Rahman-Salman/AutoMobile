@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Providers/Authprovider";
+import { useContext } from "react";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div>
       <div className="navbar bg-base-100">
@@ -33,7 +43,7 @@ const Navbar = () => {
                 <Link to="/gallery">Gallery</Link>
               </li>
               <li>
-                <a>Dashboard</a>
+                <Link to="/dashboard">Dashboard</Link>
               </li>
             </ul>
           </div>
@@ -48,7 +58,7 @@ const Navbar = () => {
               <Link to="/gallery">Gallery</Link>
             </li>
             <li>
-              <a>Dashboard</a>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
           </ul>
         </div>
@@ -111,23 +121,31 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <li>
-                <Link to="/login" className="justify-between">
-                  Login
-                  <span className="badge badge-primary">&#187;</span>
-                </Link>
-              </li>
+              {user ? (
+                <>
+                  <li>
+                    <button onClick={handleLogOut} className="btn btn-ghost">
+                      Logout
+                      <span className="badge badge-secondary">&#8594;</span>
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/login" className="justify-between">
+                      Login
+                      <span className="badge badge-primary">&#187;</span>
+                    </Link>
+                  </li>
+                </>
+              )}
+
               <li>
                 <Link to="/signup">
                   Sing Up
                   <span className="badge badge-info">&#187;</span>
                 </Link>
-              </li>
-              <li>
-                <a>
-                  Logout
-                  <span className="badge badge-secondary">&#8594;</span>
-                </a>
               </li>
             </ul>
           </div>

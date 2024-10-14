@@ -1,16 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "/steering-wheel.png";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/Authprovider";
+import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const { signIn } = useContext(AuthContext);
 
@@ -27,21 +32,21 @@ const Login = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
-      // Swal.fire({
-      //   title: "User Login Successful.",
-      //   showClass: {
-      //     popup: "animate__animated animate__fadeInDown",
-      //   },
-      //   hideClass: {
-      //     popup: "animate__animated animate__fadeOutUp",
-      //   },
-      // });
-      // navigate(from, { replace: true });
+      Swal.fire({
+        title: "User Login Successful.",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
+      navigate(from, { replace: true });
     });
   };
 
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.current.value;
     if (validateCaptcha(user_captcha_value) == true) {
       setDisabled(false);
     } else {
@@ -51,6 +56,9 @@ const Login = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>AutoMobile | Login</title>
+      </Helmet>
       <section className="py-20">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <Link
@@ -109,7 +117,6 @@ const Login = () => {
                 </label>
                 <input
                   type="text"
-                  ref={captchaRef}
                   name="captcha"
                   id="captcha"
                   placeholder="Type the captcha code"
@@ -117,7 +124,7 @@ const Login = () => {
                   required=""
                 />
                 <button
-                  onClick={handleValidateCaptcha}
+                  onBlur={handleValidateCaptcha}
                   className="w-full my-4 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800"
                 >
                   <span className="w-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -134,7 +141,7 @@ const Login = () => {
                 </span>
               </button>
             </form>
-            <p className="p-4 hover:text-blue-500 text-center">
+            <p className="p-4 hover:text-blue-500 text-center cursor-pointer">
               <small className="px-6">
                 New Here? <Link to="/signup">Create an account</Link>
               </small>
