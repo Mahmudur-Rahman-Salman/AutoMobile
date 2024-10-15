@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useCart from "../../hooks/useCart";
 
 const CarCards = ({ item }) => {
   const { brand, model, year, price, mileage, image, id } = item;
@@ -9,7 +10,7 @@ const CarCards = ({ item }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
-  // const [, refetch] = useCarts();
+  const [, refetch] = useCart();
 
   const handleAddtoCart = (car) => {
     if (user && user.email) {
@@ -32,7 +33,7 @@ const CarCards = ({ item }) => {
             timer: 1000,
           });
           // refetch cart to update the cart items count
-          // refetch();
+          refetch();
         }
       });
     } else {
