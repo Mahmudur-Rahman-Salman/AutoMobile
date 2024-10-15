@@ -27,6 +27,7 @@ async function run() {
 
     const carCollection = client.db("AutomobileDB").collection("cars");
     const reviewsCollection = client.db("AutomobileDB").collection("reviews");
+    const cartCollection = client.db("AutomobileDB").collection("carts");
 
     app.get("/gallery", async (req, res) => {
       const result = await carCollection.find().toArray();
@@ -34,6 +35,22 @@ async function run() {
     });
     app.get("/reviews", async (req, res) => {
       const result = await reviewsCollection.find().toArray();
+      res.send(result);
+    });
+
+    // carts collection
+    app.get("/carts", async (req, res) => {
+      // const email = req.query.email;
+      // const query = { email: email };
+      // const result = await cartCollection.find(query).toArray();
+      const result = await cartCollection.find().toArray();
+      res.send(result);
+    });
+
+    // carts
+    app.post("/carts", async (req, res) => {
+      const cartItem = req.body;
+      const result = await cartCollection.insertOne(cartItem);
       res.send(result);
     });
 
