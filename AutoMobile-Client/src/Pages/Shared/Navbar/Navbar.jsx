@@ -2,14 +2,23 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Providers/Authprovider";
 import { useContext } from "react";
 import useCart from "../../../hooks/useCart";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const [cart] = useCart(); 
+  const [cart] = useCart();
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "logout successfully.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
       .catch((error) => console.log(error));
   };
 
@@ -87,7 +96,9 @@ const Navbar = () => {
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                <span className="badge badge-sm indicator-item">{cart.length}</span>
+                <span className="badge badge-sm indicator-item">
+                  {cart.length}
+                </span>
               </div>
             </div>
             <div
@@ -98,7 +109,10 @@ const Navbar = () => {
                 <span className="text-lg font-bold">{cart.length} Items</span>
                 <span className="text-info">Subtotal: $999</span>
                 <div className="card-actions">
-                  <Link to="/dashboard/cart" className="btn btn-primary btn-block">
+                  <Link
+                    to="/dashboard/cart"
+                    className="btn btn-primary btn-block"
+                  >
                     View cart
                   </Link>
                 </div>

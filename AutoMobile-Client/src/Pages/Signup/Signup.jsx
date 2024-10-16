@@ -5,8 +5,11 @@ import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/Authprovider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Signup = () => {
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -24,15 +27,25 @@ const Signup = () => {
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
           console.log("user profile info updated");
-          reset();
-          Swal.fire({
-            position: "top-center",
-            icon: "success",
-            title: "User created successfully.",
-            showConfirmButton: false,
-            timer: 1500,
+          // create user entry in the database
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user added to the database");
+              reset();
+              Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "User created successfully.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
           });
-          navigate("/");
         })
         .catch((error) => console.log(error));
     });
@@ -164,6 +177,7 @@ const Signup = () => {
                 </span>
               </button>
             </form>
+            <SocialLogin></SocialLogin>
             <p className="p-4 hover:text-blue-500 text-center cursor-pointer">
               <small className="px-6">
                 Already have an account <Link to="/login">Login</Link>

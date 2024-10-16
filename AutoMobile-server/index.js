@@ -28,6 +28,7 @@ async function run() {
     const carCollection = client.db("AutomobileDB").collection("cars");
     const reviewsCollection = client.db("AutomobileDB").collection("reviews");
     const cartCollection = client.db("AutomobileDB").collection("carts");
+    const userCollection = client.db("AutomobileDB").collection("users");
 
     app.get("/gallery", async (req, res) => {
       const result = await carCollection.find().toArray();
@@ -54,10 +55,24 @@ async function run() {
       res.send(result);
     });
     // carts delete
-    app.delete('/carts/:id', async (req, res) => {
+    app.delete("/carts/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await cartCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // users related api
+    app.post("/users", async (req, res) => {
+      const user = req.body;
+      // insert email if user doesnt exists:
+      // you can do this many ways (1. email unique, 2. upsert 3. simple checking)
+      // const query = { email: user.email };
+      // const existingUser = await userCollection.findOne(query);
+      // if (existingUser) {
+      //   return res.send({ message: "user already exists", insertedId: null });
+      // }
+      const result = await userCollection.insertOne(user);
       res.send(result);
     });
 

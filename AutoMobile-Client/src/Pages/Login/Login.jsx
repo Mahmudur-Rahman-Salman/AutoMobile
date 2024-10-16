@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/Authprovider";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -141,6 +142,7 @@ const Login = () => {
                 </span>
               </button>
             </form>
+            <SocialLogin></SocialLogin>
             <p className="p-4 hover:text-blue-500 text-center cursor-pointer">
               <small className="px-6">
                 New Here? <Link to="/signup">Create an account</Link>
