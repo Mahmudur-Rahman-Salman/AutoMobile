@@ -1,4 +1,6 @@
-import CarCards from "../carCards/carCards";
+
+
+import CarCards from "../CarCards/CarCards";
 
 const CarTabs = ({items}) => {
   return (

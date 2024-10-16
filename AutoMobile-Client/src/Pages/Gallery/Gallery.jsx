@@ -5,7 +5,6 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useState } from "react";
 import useLoadCars from "../../hooks/useLoadCars";
-import CarCards from "../../components/carCards/carCards";
 import CarTabs from "../../components/CarTabs/CarTabs";
 
 const Gallery = () => {
