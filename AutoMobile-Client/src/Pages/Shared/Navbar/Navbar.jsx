@@ -59,9 +59,9 @@ const Navbar = () => {
             <li>
               <Link to="/gallery">Gallery</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/dashboard">Dashboard</Link>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="navbar-end">
@@ -98,9 +98,9 @@ const Navbar = () => {
                 <span className="text-lg font-bold">{cart.length} Items</span>
                 <span className="text-info">Subtotal: $999</span>
                 <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
+                  <Link to="/dashboard/cart" className="btn btn-primary btn-block">
                     View cart
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

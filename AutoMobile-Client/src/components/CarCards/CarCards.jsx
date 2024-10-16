@@ -12,7 +12,7 @@ const CarCards = ({ item }) => {
   const axiosSecure = useAxiosSecure();
   const [, refetch] = useCart();
 
-  const handleAddtoCart = (car) => {
+  const handleAddtoCart = () => {
     if (user && user.email) {
       //send cart item to the database
       const cartItem = {
