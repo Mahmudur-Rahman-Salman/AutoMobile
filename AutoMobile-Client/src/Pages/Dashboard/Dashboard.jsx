@@ -1,6 +1,7 @@
 import {
   FaAd,
   FaCalendar,
+  FaEnvelope,
   FaHome,
   FaList,
   FaSearch,
@@ -48,6 +49,7 @@ const Dashboard = () => {
               </NavLink>
             </li>
             <div className="divider"></div>
+            {/* Shared links */}
             <li>
               <NavLink to="/">
                 <FaHome></FaHome>
@@ -58,6 +60,12 @@ const Dashboard = () => {
               <NavLink to="/gallery">
                 <FaSearch></FaSearch>
                 Gallery
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact">
+                <FaEnvelope></FaEnvelope>
+                Contact
               </NavLink>
             </li>
           </ul>
