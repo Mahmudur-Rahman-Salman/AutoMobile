@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -18,7 +19,7 @@ const AllUsers = () => {
       if (res.data.modifiedCount > 0) {
         refetch();
         Swal.fire({
-          position: "top-end",
+          position: "top-center",
           icon: "success",
           title: `${user.name} is an Admin Now!`,
           showConfirmButton: false,
